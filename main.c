@@ -26,7 +26,6 @@ int print_whole_file() {
         printf("%02x %c \t", c, (char) c);
         //printf("%c", (char) c);
         if (i % 16 == 15) putchar('\n');  // 16 bytes/line
-        else if (i % 2 == 1) putchar(' ');
     }
 
     fclose(fp);
@@ -60,15 +59,19 @@ void file_print(int bytes_to_read, int print_chars) {
     fread(buffer, 1, bytes_to_read, fp); // read given bytes
 
     for (int i = 0; i < bytes_to_read; ++i) {
-        printf(ANSI_COLOR_MAGENTA "%02x ", buffer[i]); // print as hex
+        printf(ANSI_COLOR_MAGENTA "0x%02x\t", buffer[i]); // print as hex
+        if (i % 16 == 15 && i != bytes_to_read-1) putchar('\n');  // 16 bytes/line
+    }
+    printf("\n");
 
-        if (i % 16 == 15) putchar('\n');  // 16 bytes/line
-        else if (i % 2 == 1) putchar(' ');
+    for (int i = 0; i < bytes_to_read; ++i) {
+        printf(ANSI_COLOR_CYAN "%d\t\t", buffer[i]); // print as hex
+        if (i % 16 == 15 && i != bytes_to_read-1) putchar('\n');  // 16 bytes/line
     }
     printf("\n");
 
     if (print_chars) {
-        for (int i = 0; i < bytes_to_read; ++i) printf(ANSI_COLOR_CYAN "%c ", (char) buffer[i]); // print as char
+        for (int i = 0; i < bytes_to_read; ++i) printf(ANSI_COLOR_BLUE "%c\t\t", (char) buffer[i]); // print as char
         printf("\n");
     }
     printf("\n");
