@@ -9,30 +9,6 @@
 #define ANSI_COLOR_CYAN    "\x1b[36m"
 #define ANSI_COLOR_RESET   "\x1b[0m"
 
-int print_whole_file() {
-    FILE *fp;
-    int c, i = -1, max;
-
-    fp = fopen("../gpt.iso", "rb");
-
-    if (fp == NULL) {
-        fprintf(stderr, "cannot open input file\n");
-        return 1;
-    }
-
-    //for (i = 0, max = 4900; i < max && (c = getc(fp)) != EOF; i++) {
-    while ((c = getc(fp)) != EOF) {
-        i++;
-        printf("%02x %c \t", c, (char) c);
-        //printf("%c", (char) c);
-        if (i % 16 == 15) putchar('\n');  // 16 bytes/line
-    }
-
-    fclose(fp);
-
-    return 0;
-}
-
 FILE *fp;
 
 int file_open(char filename[]) { // open file with filename
