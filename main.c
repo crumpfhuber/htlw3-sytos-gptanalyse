@@ -53,8 +53,13 @@ void file_print(int bytes_to_read, int print_chars) {
     printf("\n");
 }
 
-int main() {
-    if (file_open("../gpt.iso")) return 1;
+int main(int argc, char **argv) {
+    if (argc < 2) {
+        printf(ANSI_COLOR_RED "missing attribute");
+        return 1;
+    }
+
+    if (file_open(*(argv+1))) return 1;
 
     file_seek(512L);
 
