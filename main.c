@@ -108,6 +108,31 @@ int main(int argc, char **argv) {
     printf(ANSI_COLOR_GREEN "Offsett 92\t\tLength: *\t\t\tReservierter Bereich; muss mit Nullen, für den Rest des Blocks, belegt sein (420 Bytes bei einem 512-byte LBA)\n");
     file_print(420,0);
 
+    fseek(fp, 512L, SEEK_SET);
+
+    for (int i = 2; i <= 33; ++i) {
+        printf("\n\n\n\n\n");
+        printf(ANSI_COLOR_RED "LBA-%d\n", i);
+
+        printf(ANSI_COLOR_GREEN "Partitionstyp-GUID\n");
+        file_print(16, 0);
+
+        printf(ANSI_COLOR_GREEN "Eindeutige Partitions-GUID\n");
+        file_print(16, 0);
+
+        printf(ANSI_COLOR_GREEN "Beginn der Partition (erster LBA – Little-Endian)\n");
+        file_print(8, 0);
+
+        printf(ANSI_COLOR_GREEN "Ende der Partition (letzter LBA – inklusive)\n");
+        file_print(8, 0);
+
+        printf(ANSI_COLOR_GREEN "Attribute (siehe folgende Tabelle)\n");
+        file_print(8, 0);
+
+        printf(ANSI_COLOR_GREEN "Partitionsname (36 UTF-16LE-Zeichen)\n");
+        file_print(72, 0);
+    }
+
     file_close();
     return 0;
 }
