@@ -47,7 +47,7 @@ void file_print(int bytes_to_read, int print_chars) {
     printf("\n");
 
     if (print_chars) {
-        for (int i = 0; i < bytes_to_read; ++i) printf(ANSI_COLOR_BLUE "%c\t\t", (char) buffer[i]); // print as char
+        for (int i = 0; i < bytes_to_read; ++i) printf(ANSI_COLOR_BLUE "%c ", (char) buffer[i]); // print as char
         printf("\n");
     }
     printf("\n");
@@ -130,7 +130,7 @@ int main(int argc, char **argv) {
         file_print(8, 0);
 
         printf(ANSI_COLOR_GREEN "Partitionsname (36 UTF-16LE-Zeichen)\n");
-        file_print(72, 0);
+        file_print(72, 1);
     }
 
     file_close();
